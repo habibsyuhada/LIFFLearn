@@ -3,7 +3,7 @@ function loadCatatan() {
         list_data = JSON.parse(localStorage.getItem('list_data'));
         var data_app = "";
         if (list_data.length > 0) {
-            data_app = '<table class="table table-striped table-dark">';
+            data_app = '<table class="table table-striped w-100">';
             data_app += '<thead>' +
                 '<th>ID</th>' +
                 '<th>Nama</th>' +
