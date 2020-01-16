@@ -2,48 +2,80 @@
 <html>
  
 <head>
-    <title>Catatan Harianku</title>
+    <title>E-Library</title>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <script src="assets/js/jquery-3.4.1.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="style.css"> 
+
+    <style type="text/css">
+        .well{
+            margin-top: 2rem;
+            background-color: white;
+            padding: 3rem;
+        }
+    </style>
 </head>
  
 <body onload="loadCatatan();">
  
     <div class="col-xs-12" ng-controller="listContactCtrl">
-        <div class="page-header">
+        <div class="page-header bg-success py-4 text-white">
             <h1 align="center">
-                Catatan Harianku
+                E-Library
             </h1>
-            <ul class="nav nav-pills">
-                <li><a id="nav-list-catatan" href="javascript:void(0);" onclick="gantiMenu('list-catatan');">List Catatan</a></li>
-                <li><a id="nav-tambah-catatan" href="javascript:void(0);" onclick="gantiMenu('tambah-catatan');">Tambah Catatan</a></li>
-            </ul>
+            <!-- <ul class="nav nav-pills">
+                <li><a id="nav-list-catatan" href="javascript:void(0);" onclick="gantiMenu('list-catatan');">List Data</a></li>
+                <li><a id="nav-tambah-catatan" href="javascript:void(0);" onclick="gantiMenu('tambah-catatan');">Tambah Data</a></li>
+            </ul> -->
  
         </div>
-        <div id="tambah-catatan" class="well" style="display:none;">
+        <div class="text-center bg-dark py-2">
+            <div class="container">
+                <div class="row justify-content-sm-center justify-content-md-between">
+                    <div class="col-md-auto align-self-center">
+                        <a id="nav-list-catatan" href="javascript:void(0);" onclick="gantiMenu('list-catatan');" class="btn btn-outline-light btn-small">List Data</a>
+                        <a id="nav-tambah-catatan" href="javascript:void(0);" onclick="gantiMenu('tambah-catatan');" class="btn btn-outline-light btn-small">Tambah Data</a>
+                    </div>
+                    <div class="col-md-auto align-self-center text-white">
+                        isInClient : <span id="isInClient"></span><br>
+                        isLoggedIn : <span id="isLoggedIn"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="tambah-catatan" class="well container" style="display:none;">
             <form id="form-data">
-                <div id="nama-group" class="form-group">
-                    <label>Nama:</label>
+                <div id="nama-group" class="form-group text-left">
+                    <label>Nama Peminjam</label>
                     <input type="text" class="form-control" id="nama" name="nama">
                 </div>
-                <div id="tanggal-group" class="form-group">
-                    <label>Tanggal:</label>
-                    <input type="text" class="form-control" id="tanggal" name="tanggal">
+                <div id="tanggal-group" class="form-group text-left">
+                    <label>Judul Buku</label>
+                    <input type="text" class="form-control" id="judul" name="judul">
                 </div>
-                <div id="agenda-group" class="form-group">
-                    <label>Agenda:</label>
-                    <textarea class="form-control" id="agenda" name="agenda"></textarea><br />
+                <div id="agenda-group" class="form-group text-left">
+                    <label>Penerbit</label>
+                    <input type="text" class="form-control" id="penerbit" name="penerbit">
+                </div>
+                <div id="agenda-group" class="form-group text-left">
+                    <label>Tahun Terbit</label>
+                    <input type="number" class="form-control" id="tahun" name="tahun">
+                </div>
+                <div id="agenda-group" class="form-group text-left">
+                    <label>Tanggal Peminjaman</label>
+                    <input type="date" class="form-control" id="tgl_pinjam" name="tgl_pinjam">
+                    <input type="hidden" class="form-control" id="tgl_kembali" name="tgl_kembali" value="-">
                 </div>
                 <input type="button" value="Simpan" onclick="simpanData();" class="btn btn-success btn-small" />
-                <input type="reset" value="Reset" onclick="" class="btn btn-warning btn-small" />
+                <input type="button" value="Cancel" onclick="gantiMenu('list-catatan');" class="btn btn-danger btn-small" />
+                <!-- <input type="reset" value="Reset" onclick="" class="btn btn-warning btn-small" /> -->
             </form>
         </div>
  
-        <div id="edit-data" class="well" style="display:none;">
+        <div id="edit-data" class="well container" style="display:none;">
             <form id="eform-data">
  
                 <div id="nama-group" class="form-group" style="display:none;">
@@ -51,26 +83,38 @@
                     <input type="text" class="form-control" id="eid_data" name="nama">
                 </div>
  
-                <div id="nama-group" class="form-group">
-                    <label>Nama:</label>
+                <div id="nama-group" class="form-group text-left">
+                    <label>Nama Peminjam</label>
                     <input type="text" class="form-control" id="enama" name="nama">
                 </div>
-                <div id="tanggal-group" class="form-group">
-                    <label>Tanggal:</label>
-                    <input type="text" class="form-control" id="etanggal" name="tanggal">
+                <div id="tanggal-group" class="form-group text-left">
+                    <label>Judul Buku</label>
+                    <input type="text" class="form-control" id="ejudul" name="judul">
                 </div>
-                <div id="agenda-group" class="form-group">
-                    <label>Agenda:</label>
-                    <textarea class="form-control" id="eagenda" name="agenda"></textarea><br />
+                <div id="agenda-group" class="form-group text-left">
+                    <label>Penerbit</label>
+                    <input type="text" class="form-control" id="epenerbit" name="penerbit">
                 </div>
+                <div id="agenda-group" class="form-group text-left">
+                    <label>Tahun Terbit</label>
+                    <input type="number" class="form-control" id="etahun" name="tahun">
+                </div>
+                <div id="agenda-group" class="form-group text-left">
+                    <label>Tanggal Peminjaman</label>
+                    <input type="date" class="form-control" id="etgl_pinjam" name="tgl_pinjam">
+                </div>
+                <div id="agenda-group" class="form-group text-left">
+                    <label>Tanggal Pengembalian</label>
+                    <input type="date" class="form-control" id="etgl_kembali" name="tgl_kembali">
+                </div>
+
                 <input type="button" value="Simpan" onclick="simpanEditData();" class="btn btn-success btn-small" />
-                <input type="reset" value="Reset" onclick="" class="btn btn-warning btn-small" />
-                <input type="button" value="Cancel" onclick="gantiMenu('list-catatan');"
-                    class="btn btn-warning btn-small" />
+                <!-- <input type="reset" value="Reset" onclick="" class="btn btn-warning btn-small" /> -->
+                <input type="button" value="Cancel" onclick="gantiMenu('list-catatan');" class="btn btn-danger btn-small" />
             </form>
         </div>
  
-        <div id="lihat-data" class="well" style="display:none;">
+        <div id="lihat-data" class="well container" style="display:none;">
             <form id="eform-data">
  
                 <div id="nama-group" class="form-group" style="display:none;">
@@ -78,17 +122,29 @@
                     <input type="text" class="form-control" id="lid_data" name="nama" disabled>
                 </div>
  
-                <div id="nama-group" class="form-group">
+                <div id="nama-group" class="form-group text-left">
                     <label for="disabled">Nama:</label>
                     <input type="text" class="form-control" id="lnama" name="nama" disabled>
                 </div>
-                <div id="tanggal-group" class="form-group">
-                    <label for="disabled">Tanggal:</label>
-                    <input type="text" class="form-control" id="ltanggal" name="tanggal" disabled>
+                <div id="tanggal-group" class="form-group text-left">
+                    <label>Judul Buku</label>
+                    <input type="text" class="form-control" id="ljudul" name="judul" disabled>
                 </div>
-                <div id="agenda-group" class="form-group">
-                    <label for="disabled">Agenda:</label>
-                    <textarea class="form-control" id="lagenda" name="agenda" disabled></textarea>
+                <div id="agenda-group" class="form-group text-left">
+                    <label>Penerbit</label>
+                    <input type="text" class="form-control" id="lpenerbit" name="penerbit" disabled>
+                </div>
+                <div id="agenda-group" class="form-group text-left">
+                    <label>Tahun Terbit</label>
+                    <input type="number" class="form-control" id="ltahun" name="tahun" disabled>
+                </div>
+                <div id="agenda-group" class="form-group text-left">
+                    <label>Tanggal Peminjaman</label>
+                    <input type="date" class="form-control" id="ltgl_pinjam" name="tgl_pinjam" disabled>
+                </div>
+                <div id="agenda-group" class="form-group text-left">
+                    <label>Tanggal Pengembalian</label>
+                    <input type="date" class="form-control" id="ltgl_kembali" name="tgl_kembali" disabled>
                 </div>
                 <input type="button" value="Kembali" onclick="gantiMenu('list-catatan');"
                     class="btn btn-warning btn-small" />
@@ -96,8 +152,8 @@
         </div>
  
  
-        <div id="list-catatan" class="well">
-            Pilih List Catatan untuk melihat catatan yang sudah dibuat.
+        <div id="list-catatan" class="well text-center container">
+            <h4 class="font-weight-bold text-center"> Welcome to E-Library</h4>
         </div>
 
         <!--Konten LIFF v2-->
@@ -108,13 +164,13 @@
                 <div class="buttonRow">
                     <button id="openWindowButton" class="btn btn-success btn-small">Open External Window</button>
                     <button id="closeWindowButton" class="btn btn-danger btn-small">Close LIFF App</button>
-                    <button id="sendMessageButton" class="btn btn-warning btn-small">Send Message</button>
+                    <button id="sendMessageButton" class="btn btn-warning btn-small d-none">Send Message</button>
                 </div>
  
             </div>
  
             <!-- LIFF DATA -->
-            <div id="liffData">
+            <!-- <div id="liffData">
                 <h3 id="liffDataHeader" class="textLeft">Informasi:</h3>
                 <table>
                     <tr>
@@ -126,7 +182,7 @@
                         <td id="isLoggedIn" class="textLeft"></td>
                     </tr>
                 </table>
-            </div>
+            </div> -->
             <!-- LOGIN LOGOUT BUTTONS -->
             <div class="buttonGroup">
                 <button id="liffLoginButton" class="btn btn-success btn-small">Log in</button>
@@ -176,4 +232,15 @@
 <script src="catatan-config.js"></script>
 <script src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
 <script src="liff-starter.js"></script>
+<script type="text/javascript">
+    $(document).ready( function() {
+        var d = new Date();
+        var yyyy = d.getFullYear().toString();
+        var mm = (d.getMonth()+1).toString(); // getMonth() is zero-based
+        var dd  = d.getDate().toString();
+        var strDate = yyyy + "-" + (mm[1]?mm:"0"+mm[0]) + "-" + (dd[1]?dd:"0"+dd[0]); // padding
+        // console.log(strDate);
+        $('#tgl_pinjam').val(strDate);
+    });
+</script>
 </html>

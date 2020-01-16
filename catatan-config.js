@@ -3,27 +3,29 @@ function loadCatatan() {
         list_data = JSON.parse(localStorage.getItem('list_data'));
         var data_app = "";
         if (list_data.length > 0) {
-            data_app = '<table class="table table-striped w-100">';
+            data_app = '<table class="table table-striped d-block d-md-table">';
             data_app += '<thead>' +
-                '<th>ID</th>' +
-                '<th>Nama</th>' +
-                '<th>Tanggal</th>' +
-                '<th>Agenda</th>' +
-                '<th>Hapus Agenda</th>' +
-                '<th>Lihat Agenda</th>' +
-                '<th>Edit Agenda</th>' +
+                '<th class="text-center">Nama Peminjam</th>' +
+                '<th class="text-center">Judul Buku</th>' +
+                '<th class="text-center">Penerbit</th>' +
+                '<th class="text-center">Tahun Terbit</th>' +
+                '<th class="text-center">Tanggal Pinjam</th>' +
+                '<th class="text-center">Tanggal Pengembalian</th>' +
+                '<th class="text-center">Action</th>' +
                 '</thead> <tbody>';
  
             for (i in list_data) {
                 data_app += '<tr>';
                 data_app +=
-                    '<td>' + list_data[i].id_data + ' </td>' +
                     '<td>' + list_data[i].nama + ' </td>' +
-                    '<td>' + list_data[i].tanggal + ' </td>' +
-                    '<td>' + list_data[i].agenda + ' </td>' +
-                    '<td><a class="btn btn-danger btn-small" href="javascript:void(0)" onclick="hapusData(\'' + list_data[i].id_data + '\')">Hapus</a></td>' +
-                    '<td><a class="btn btn-danger btn-small" href="javascript:void(0)" onclick="lihatData(\'' + list_data[i].id_data + '\')">Lihat</a></td>' +
-                    '<td><a class="btn btn-warning btn-small" href="javascript:void(0)" onclick="editData(\'' + list_data[i].id_data + '\')">Edit</a></td>';
+                    '<td>' + list_data[i].judul + ' </td>' +
+                    '<td>' + list_data[i].penerbit + ' </td>' +
+                    '<td>' + list_data[i].tahun + ' </td>' +
+                    '<td>' + list_data[i].tgl_pinjam + ' </td>' +
+                    '<td>' + list_data[i].tgl_kembali + ' </td>' +
+                    '<td><a class="btn btn-danger btn-small" href="javascript:void(0)" onclick="hapusData(\'' + list_data[i].id_data + '\')">Hapus</a> ' +
+                    '<a class="btn btn-info btn-small" href="javascript:void(0)" onclick="lihatData(\'' + list_data[i].id_data + '\')">Lihat</a> ' +
+                    '<a class="btn btn-warning btn-small" href="javascript:void(0)" onclick="editData(\'' + list_data[i].id_data + '\')">Edit</a></td>';
                 data_app += '</tr>';
             }
  
@@ -31,7 +33,7 @@ function loadCatatan() {
  
         }
         else {
-            data_app = "Catatan masih kosong nih";
+            data_app = "Data Kosong";
         }
  
  
@@ -50,8 +52,11 @@ function editData(id) {
             if (list_data[i].id_data == id) {
                 $("#eid_data").val(list_data[i].id_data);
                 $("#enama").val(list_data[i].nama);
-                $("#etanggal").val(list_data[i].tanggal);
-                $("#eagenda").val(list_data[i].agenda);
+                $("#ejudul").val(list_data[i].judul);
+                $("#epenerbit").val(list_data[i].penerbit);
+                $("#etahun").val(list_data[i].tahun);
+                $("#etgl_pinjam").val(list_data[i].tgl_pinjam);
+                $("#etgl_kembali").val(list_data[i].tgl_kembali);
                 list_data.splice(idx_data, 1);
             }
             idx_data++;
@@ -70,8 +75,11 @@ function lihatData(id) {
             if (list_data[i].id_data == id) {
                 $("#lid_data").val(list_data[i].id_data);
                 $("#lnama").val(list_data[i].nama);
-                $("#ltanggal").val(list_data[i].tanggal);
-                $("#lagenda").val(list_data[i].agenda);
+                $("#ljudul").val(list_data[i].judul);
+                $("#lpenerbit").val(list_data[i].penerbit);
+                $("#ltahun").val(list_data[i].tahun);
+                $("#ltgl_pinjam").val(list_data[i].tgl_pinjam);
+                $("#ltgl_kembali").val(list_data[i].tgl_kembali);
                 list_data.splice(idx_data, 1);
             }
             idx_data++;
@@ -97,8 +105,11 @@ function simpanData() {
     }
  
     nama = $('#nama').val();
-    tanggal = $('#tanggal').val();
-    agenda = $('#agenda').val();
+    judul = $('#judul').val();
+    penerbit = $('#penerbit').val();
+    tahun = $('#tahun').val();
+    tgl_pinjam = $('#tgl_pinjam').val();
+    tgl_kembali = '';
  
     if (localStorage.list_data && localStorage.id_data) {
         list_data = JSON.parse(localStorage.getItem('list_data'));
@@ -110,7 +121,7 @@ function simpanData() {
     }
  
     id_data++;
-    list_data.push({ 'id_data': id_data, 'nama': nama, 'tanggal': tanggal, 'agenda': agenda });
+    list_data.push({ 'id_data': id_data, 'nama': nama, 'judul': judul, 'penerbit': penerbit, 'tahun': tahun, 'tgl_pinjam': tgl_pinjam, 'tgl_kembali': tgl_kembali });
     localStorage.setItem('list_data', JSON.stringify(list_data));
     localStorage.setItem('id_data', id_data);
     document.getElementById('form-data').reset();
@@ -135,10 +146,13 @@ function simpanEditData() {
  
     id_data = $('#eid_data').val();
     nama = $('#enama').val();
-    tanggal = $('#etanggal').val();
-    agenda = $('#eagenda').val();
+    judul = $('#ejudul').val();
+    penerbit = $('#epenerbit').val();
+    tahun = $('#etahun').val();
+    tgl_pinjam = $('#etgl_pinjam').val();
+    tgl_kembali = $('#etgl_kembali').val();
  
-    list_data.push({ 'id_data': id_data, 'nama': nama, 'tanggal': tanggal, 'agenda': agenda });
+    list_data.push({ 'id_data': id_data, 'nama': nama, 'judul': judul, 'penerbit': penerbit, 'tahun': tahun, 'tgl_pinjam': tgl_pinjam, 'tgl_kembali': tgl_kembali });
     localStorage.setItem('list_data', JSON.stringify(list_data));
     document.getElementById('eform-data').reset();
     gantiMenu('list-catatan');

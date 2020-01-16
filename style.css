@@ -1,7 +1,10 @@
 html {
     font-size: 11px;
 }
- 
+
+body{
+    background-color: whitesmoke;
+} 
 table {
     width: 100%;
     overflow-x: auto;
