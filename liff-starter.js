@@ -139,7 +139,7 @@ function registerButtonHandlers() {
         }
     });
 
-    document.getElementById('scanQrCodeButton').addEventListener('click', function() {
+    document.getElementById('scanQrCodeButton2').addEventListener('click', function() {
         if (!liff.isInClient()) {
             sendAlertIfNotInClient();
         } else {
@@ -150,10 +150,11 @@ function registerButtonHandlers() {
                     // e.g. QR = Judul;Penerbit;Tahun
                     var res = stringifiedResult.split(";");
                     if(res.length > 1){
-                        document.getElementById('judul').textContent = res[0];
-                        document.getElementById('penerbit').textContent = res[1];
-                        document.getElementById('tahun').textContent = res[2];
+                        document.getElementById('judul').value = res[0];
+                        document.getElementById('penerbit').value = res[1];
+                        document.getElementById('tahun').value = res[2];
                         toggleQrCodeReader();
+                        document.getElementById('scanQrField').textContent = res[0] + " " + res[1] + " " + res[2];
                     }
                     else{
                         document.getElementById('scanQrField').textContent = "Wrong Format! "+stringifiedResult;
