@@ -148,7 +148,7 @@ function registerButtonHandlers() {
                     // e.g. result = { value: "Hello LIFF app!" }
                     const stringifiedResult = JSON.stringify(result);
                     // e.g. QR = Judul;Penerbit;Tahun
-                    var res = stringifiedResult.split(";");
+                    var res = stringifiedResult.split("/");
                     if(res.length > 1){
                         document.getElementById('judul').textContent = res[0];
                         document.getElementById('penerbit').textContent = res[1];
