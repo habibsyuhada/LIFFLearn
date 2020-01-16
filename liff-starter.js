@@ -156,7 +156,7 @@ function registerButtonHandlers() {
                         toggleQrCodeReader();
                     }
                     else{
-                        document.getElementById('scanQrField').textContent = "scanCode failed!"+stringifiedResult;
+                        document.getElementById('scanQrField').textContent = "Wrong Format!"+stringifiedResult;
                     }
                     
                 }).catch(err => {
