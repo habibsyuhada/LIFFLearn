@@ -160,7 +160,7 @@ function registerButtonHandlers() {
                     }
                     
                 }).catch(err => {
-                    document.getElementById('scanQrField').textContent = "scanCode failed!";
+                    document.getElementById('scanQrField').textContent = "Scan QR Code failed!";
                 });
             }
         }
