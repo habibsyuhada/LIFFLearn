@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <script src="assets/js/jquery-3.4.1.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="style.css?v=2.0"> 
+    <link rel="stylesheet" href="style.css?v=2.1"> 
 
     <style type="text/css">
         .well{
@@ -235,18 +235,7 @@
 
     </div>
 </body>
-<script src="catatan-config.js?v=2.0"></script>
+<script src="catatan-config.js?v=2.1"></script>
 <script src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
-<script src="liff-starter.js?v=2.0"></script>
-<script type="text/javascript">
-    $(document).ready( function() {
-        var d = new Date();
-        var yyyy = d.getFullYear().toString();
-        var mm = (d.getMonth()+1).toString(); // getMonth() is zero-based
-        var dd  = d.getDate().toString();
-        var strDate = yyyy + "-" + (mm[1]?mm:"0"+mm[0]) + "-" + (dd[1]?dd:"0"+dd[0]); // padding
-        // console.log(strDate);
-        $('#tgl_pinjam').val(strDate);
-    });
-</script>
+<script src="liff-starter.js?v=2.1"></script>
 </html>

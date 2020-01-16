@@ -202,6 +202,7 @@ function gantiMenu(menu) {
         // console.log(strDate);
         $('#tgl_pinjam').val(strDate);
         document.getElementById('scanQrField').textContent = "";
+        document.getElementById('form-data').reset();
 
         $('#tambah-catatan').hide();
         $('#list-catatan').fadeIn();

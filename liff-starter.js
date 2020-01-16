@@ -153,8 +153,8 @@ function registerButtonHandlers() {
                         document.getElementById('judul').value = res[0];
                         document.getElementById('penerbit').value = res[1];
                         document.getElementById('tahun').value = res[2];
-                        document.getElementById('scanQrField').textContent = "Success!";
-                        toggleQrCodeReader();
+                        document.getElementById('scanQrField').textContent = "<span clas='text-success'>Success!</span>";
+                        // toggleQrCodeReader();
                     }
                     else{
                         document.getElementById('scanQrField').textContent = "Wrong Format! "+stringifiedResult;
