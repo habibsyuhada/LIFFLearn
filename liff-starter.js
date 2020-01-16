@@ -98,7 +98,7 @@ function displayIsInClientInfo() {
 function registerButtonHandlers() {
     document.getElementById('openWindowButton').addEventListener('click', function() {
         liff.openWindow({
-            url: 'https://example.herokuapp.com/', // Isi dengan Endpoint URL aplikasi web Anda
+            url: 'https://e-library-submission.herokuapp.com/', // Isi dengan Endpoint URL aplikasi web Anda
             external: true
         });
     });
@@ -139,6 +139,22 @@ function registerButtonHandlers() {
         }
     });
 
+    document.getElementById('scanQrCodeButton').addEventListener('click', function() {
+        if (!liff.isInClient()) {
+            sendAlertIfNotInClient();
+        } else {
+            if (liff.scanCode) {
+                liff.scanCode().then(result => {
+                    // e.g. result = { value: "Hello LIFF app!" }
+                    const stringifiedResult = JSON.stringify(result);
+                    document.getElementById('scanQrField').textContent = stringifiedResult;
+                    toggleQrCodeReader();
+                }).catch(err => {
+                    document.getElementById('scanQrField').textContent = "scanCode failed!";
+                });
+            }
+        }
+    });
 
 }
 
