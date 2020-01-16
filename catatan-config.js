@@ -3,7 +3,7 @@ function loadCatatan() {
         list_data = JSON.parse(localStorage.getItem('list_data'));
         var data_app = "";
         if (list_data.length > 0) {
-            data_app = '<table class="table table-striped d-block d-md-table">';
+            data_app = '<table class="table table-striped d-block d-md-table text-nowrap">';
             data_app += '<thead>' +
                 '<th class="text-center">Nama Peminjam</th>' +
                 '<th class="text-center">Judul Buku</th>' +
@@ -91,25 +91,25 @@ function lihatData(id) {
  
  
 function simpanData() {
-    if (!liff.isInClient()) {
-        sendAlertIfNotInClient();
-    } else {
-        liff.sendMessages([{
-            'type': 'text',
-            'text': "Catatan baru berhasil disimpan"
-        }]).then(function() {
-            alert('Catatan Tersimpan');
-        }).catch(function(error) {
-            alert('Aduh kok error ya...');
-        });
-    }
- 
     nama = $('#nama').val();
     judul = $('#judul').val();
     penerbit = $('#penerbit').val();
     tahun = $('#tahun').val();
     tgl_pinjam = $('#tgl_pinjam').val();
     tgl_kembali = '';
+
+    if (!liff.isInClient()) {
+        sendAlertIfNotInClient();
+    } else {
+        liff.sendMessages([{
+            'type': 'text',
+            'text': "Log: Insert Data Nama: "+nama+", Judul Buku:"+judul
+        }]).then(function() {
+            // alert('Catatan Tersimpan');
+        }).catch(function(error) {
+            alert('Something Wrong!');
+        });
+    }
  
     if (localStorage.list_data && localStorage.id_data) {
         list_data = JSON.parse(localStorage.getItem('list_data'));
@@ -131,19 +131,6 @@ function simpanData() {
 }
  
 function simpanEditData() {
-    if (!liff.isInClient()) {
-        sendAlertIfNotInClient();
-    } else {
-        liff.sendMessages([{
-            'type': 'text',
-            'text': "Catatan yang diedit sudah tersimpan"
-        }]).then(function() {
-            alert('Catatan Tersimpan');
-        }).catch(function(error) {
-            alert('Aduh kok error ya...');
-        });
-    }
- 
     id_data = $('#eid_data').val();
     nama = $('#enama').val();
     judul = $('#ejudul').val();
@@ -151,6 +138,19 @@ function simpanEditData() {
     tahun = $('#etahun').val();
     tgl_pinjam = $('#etgl_pinjam').val();
     tgl_kembali = $('#etgl_kembali').val();
+
+    if (!liff.isInClient()) {
+        sendAlertIfNotInClient();
+    } else {
+        liff.sendMessages([{
+            'type': 'text',
+            'text': "Log: Update Data Nama: "+nama+", Judul Buku:"+judul
+        }]).then(function() {
+            // alert('Catatan Tersimpan');
+        }).catch(function(error) {
+            alert('Something Wrong!');
+        });
+    }
  
     list_data.push({ 'id_data': id_data, 'nama': nama, 'judul': judul, 'penerbit': penerbit, 'tahun': tahun, 'tgl_pinjam': tgl_pinjam, 'tgl_kembali': tgl_kembali });
     localStorage.setItem('list_data', JSON.stringify(list_data));
@@ -166,11 +166,11 @@ function hapusData(id) {
     } else {
         liff.sendMessages([{
             'type': 'text',
-            'text': "Catatan sudah terhapus"
+            'text': "Log: Delete Data ID: "+id
         }]).then(function() {
-            alert('Catatan sudah dihapus');
+            // alert('Catatan sudah dihapus');
         }).catch(function(error) {
-            alert('Aduh kok nggak bisa');
+            alert('Something Wrong!');
         });
     }
  

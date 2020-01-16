@@ -153,15 +153,15 @@ function registerButtonHandlers() {
                         document.getElementById('judul').value = res[0];
                         document.getElementById('penerbit').value = res[1];
                         document.getElementById('tahun').value = res[2];
+                        document.getElementById('scanQrField').textContent = "Success!";
                         toggleQrCodeReader();
-                        document.getElementById('scanQrField').textContent = res[0] + " " + res[1] + " " + res[2];
                     }
                     else{
                         document.getElementById('scanQrField').textContent = "Wrong Format! "+stringifiedResult;
                     }
                     
                 }).catch(err => {
-                    document.getElementById('scanQrField').textContent = "Scan QR Code failed! "+stringifiedResult;
+                    document.getElementById('scanQrField').textContent = "Scan QR Code failed!";
                 });
             }
         }
