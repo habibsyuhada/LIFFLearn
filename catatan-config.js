@@ -194,6 +194,14 @@ function hapusData(id) {
 function gantiMenu(menu) {
     if (menu == "list-catatan") {
         loadCatatan();
+        $('#tambah-catatan').hide();
+        $('#list-catatan').fadeIn();
+        $('#edit-data').hide();
+        $('#lihat-data').hide();
+    }
+    else if (menu == "tambah-catatan") {
+        document.getElementById('form-data').reset();
+        document.getElementById('scanQrField').textContent = "";
         var d = new Date();
         var yyyy = d.getFullYear().toString();
         var mm = (d.getMonth()+1).toString(); // getMonth() is zero-based
@@ -201,15 +209,7 @@ function gantiMenu(menu) {
         var strDate = yyyy + "-" + (mm[1]?mm:"0"+mm[0]) + "-" + (dd[1]?dd:"0"+dd[0]); // padding
         // console.log(strDate);
         $('#tgl_pinjam').val(strDate);
-        document.getElementById('scanQrField').textContent = "";
-        document.getElementById('form-data').reset();
-
-        $('#tambah-catatan').hide();
-        $('#list-catatan').fadeIn();
-        $('#edit-data').hide();
-        $('#lihat-data').hide();
-    }
-    else if (menu == "tambah-catatan") {
+        
         $('#tambah-catatan').fadeIn();
         $('#list-catatan').hide();
         $('#edit-data').hide();
