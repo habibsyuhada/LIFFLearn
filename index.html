@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <script src="assets/js/jquery-3.4.1.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="style.css?v=1.6"> 
+    <link rel="stylesheet" href="style.css?v=1.7"> 
 
     <style type="text/css">
         .well{
@@ -71,7 +71,7 @@
                 </div>
                 <div id="agenda-group" class="form-group text-left">
                     <button id="scanQrCodeButton" class="btn btn-info btn-small">Scan QR</button><span id="scanQrField" class="text-danger"></span><br>
-                    <label class="text-muted">e.g. QR = Judul|Penerbit|Tahun</label>
+                    <label class="text-muted">e.g. QR = Judul;Penerbit;Tahun</label>
                 </div>
                 
                 <input type="button" value="Simpan" onclick="simpanData();" class="btn btn-success btn-small" />
@@ -234,9 +234,9 @@
 
     </div>
 </body>
-<script src="catatan-config.js?v=1.6"></script>
+<script src="catatan-config.js?v=1.7"></script>
 <script src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
-<script src="liff-starter.js?v=1.6"></script>
+<script src="liff-starter.js?v=1.7"></script>
 <script type="text/javascript">
     $(document).ready( function() {
         var d = new Date();

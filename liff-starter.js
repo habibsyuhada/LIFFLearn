@@ -146,9 +146,9 @@ function registerButtonHandlers() {
             if (liff.scanCode) {
                 liff.scanCode().then(result => {
                     // e.g. result = { value: "Hello LIFF app!" }
-                    const stringifiedResult = JSON.stringify(result);
+                    const stringifiedResult = result.value;
                     // e.g. QR = Judul;Penerbit;Tahun
-                    var res = stringifiedResult.split("|");
+                    var res = stringifiedResult.split(";");
                     if(res.length > 1){
                         document.getElementById('judul').textContent = res[0];
                         document.getElementById('penerbit').textContent = res[1];
@@ -156,11 +156,11 @@ function registerButtonHandlers() {
                         toggleQrCodeReader();
                     }
                     else{
-                        document.getElementById('scanQrField').textContent = "Wrong Format!"+stringifiedResult;
+                        document.getElementById('scanQrField').textContent = "Wrong Format! "+stringifiedResult;
                     }
                     
                 }).catch(err => {
-                    document.getElementById('scanQrField').textContent = "Scan QR Code failed!";
+                    document.getElementById('scanQrField').textContent = "Scan QR Code failed! "+stringifiedResult;
                 });
             }
         }
