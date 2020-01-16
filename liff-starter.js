@@ -147,8 +147,18 @@ function registerButtonHandlers() {
                 liff.scanCode().then(result => {
                     // e.g. result = { value: "Hello LIFF app!" }
                     const stringifiedResult = JSON.stringify(result);
-                    document.getElementById('scanQrField').textContent = stringifiedResult;
-                    toggleQrCodeReader();
+                    // e.g. QR = Judul;Penerbit;Tahun
+                    var res = stringifiedResult.split(";");
+                    if(res.length > 1){
+                        document.getElementById('judul').textContent = res[0];
+                        document.getElementById('penerbit').textContent = res[1];
+                        document.getElementById('tahun').textContent = res[2];
+                        toggleQrCodeReader();
+                    }
+                    else{
+                        document.getElementById('scanQrField').textContent = "scanCode failed!";
+                    }
+                    
                 }).catch(err => {
                     document.getElementById('scanQrField').textContent = "scanCode failed!";
                 });
